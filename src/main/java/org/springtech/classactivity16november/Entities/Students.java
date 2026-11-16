@@ -1,5 +1,4 @@
 package org.springtech.classactivity16november.Entities;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
