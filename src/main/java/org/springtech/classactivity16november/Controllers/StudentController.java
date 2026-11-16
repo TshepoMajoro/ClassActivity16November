@@ -1,5 +1,6 @@
 package org.springtech.classactivity16november.Controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,9 @@ public class StudentController {
     public ResponseEntity<Void> createStudent(@RequestBody StudentRequests student) throws DuplicateResourceException {
         StudentResponse response = studentService.createStudent(student);
         if (response == null){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
