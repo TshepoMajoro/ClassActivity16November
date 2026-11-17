@@ -40,12 +40,13 @@ public class StudentService {
     @Transactional
     public StudentResponse createStudent(StudentRequests request) throws DuplicateResourceException {
         if (repo.existsByEmail(request.email())){
-            try{
-                throw new DuplicateResourceException("A student with this email already exists");
-            }catch (DuplicateResourceException e){
-                System.out.println(e.getMessage());
-            }
-            return null;
+//            try{
+//                throw new DuplicateResourceException("A student with this email already exists");
+//            }catch (DuplicateResourceException e){
+//                System.out.println(e.getMessage());
+//            }
+//            return null;
+            throw new DuplicateResourceException("A student with this email already exists");
         }
         Students student = repo.save(serializeStudentRequestToStudent(request));
         return serializeStudentToStudentResponse(student);
@@ -61,12 +62,13 @@ public class StudentService {
     public StudentResponse getStudentById(Long id) throws ResourceNotFoundException {
         Optional<Students> studentOptional = repo.findById(id);
         if (studentOptional.isEmpty()){
-            try{
-                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
-            }catch (ResourceNotFoundException e){
-                System.out.println("Student of id "+id+" does not exist.");
-            }
-            return null;
+//            try{
+//                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
+//            }catch (ResourceNotFoundException e){
+//                System.out.println("Student of id "+id+" does not exist.");
+//            }
+//            return null;
+            throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
         }
         return serializeStudentToStudentResponse(studentOptional.get());
     }
@@ -76,12 +78,13 @@ public class StudentService {
         Optional<Students> studentOptional = repo.findById(id);
 
         if (studentOptional.isEmpty()){
-            try{
-                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
-            }catch (ResourceNotFoundException e){
-                System.out.println("Student of id "+id+" does not exist.");
-            }
-            return null;
+//            try{
+//                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
+//            }catch (ResourceNotFoundException e){
+//                System.out.println("Student of id "+id+" does not exist.");
+//            }
+//            return null;
+            throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
         }
 
         Students student = studentOptional.get();
@@ -103,12 +106,13 @@ public class StudentService {
     public boolean deleteStudent(Long id) throws ResourceNotFoundException {
         Optional<Students> studentOptional = repo.findById(id);
         if (studentOptional.isEmpty()){
-            try{
-                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
-            }catch (ResourceNotFoundException e){
-                System.out.println("Student of id "+id+" does not exist.");
-            }
-            return false;
+//            try{
+//                throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
+//            }catch (ResourceNotFoundException e){
+//                System.out.println("Student of id "+id+" does not exist.");
+//            }
+//            return false;
+            throw new ResourceNotFoundException("Student of id "+id+" does not exist.");
         }
         repo.delete(studentOptional.get());
         return true;
